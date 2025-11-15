@@ -1,0 +1,28 @@
+.student-card {
+  background: #ffffff;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  transition: 0.2s;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.student-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.student-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.student-class {
+  font-size: 16px;
+  color: #555;
+}

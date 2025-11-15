@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX Content Loading Example</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
@@ -12,6 +12,7 @@
       <h1>Dynamic Content Loader</h1>
     </header>
 
+    <input name="search" id="search" type="text" placeholder="Search..." />
     <main id="content-container"></main>
 
     <footer>
@@ -29,27 +30,14 @@
           dataType: "json",
           success: function (response) {
             if (response.status === "success") {
-              let html =
-                "<h2>Students List</h2><table border='1' cellpadding='8'><tr>";
-
-              // Create table headers dynamically
-              if (response.data.length > 0) {
-                Object.keys(response.data[0]).forEach((col) => {
-                  html += `<th>${col}</th>`;
-                });
-                html += "</tr>";
-              }
-
-              // Add rows
+              let html = "";
               response.data.forEach((student) => {
-                html += "<tr>";
-                Object.values(student).forEach((val) => {
-                  html += `<td>${val}</td>`;
-                });
-                html += "</tr>";
+                console.log(student);
+                html += `<div class="student-card">
+                  <div class="student-name">${student.name}</div>
+                  <div class="student-class">${student.class}</div>
+                </div>`;
               });
-
-              html += "</table>";
 
               $("#content-container").html(html);
             } else {
