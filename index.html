@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Content Loading Example</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Dynamic Content Loader</h1>
+    </header>
+
+    <main id="content-container"></main>
+
+    <footer>
+      <p>&copy; 2025 My Website</p>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+      viewStudents();
+
+      function viewStudents() {
+        $.ajax({
+          url: "api/functions.php", // your API file
+          type: "GET",
+          data: { action: "getStudents" }, // API action
+          dataType: "json",
+          success: function (response) {
+            if (response.status === "success") {
+              let html =
+                "<h2>Students List</h2><table border='1' cellpadding='8'><tr>";
+
+              // Create table headers dynamically
+              if (response.data.length > 0) {
+                Object.keys(response.data[0]).forEach((col) => {
+                  html += `<th>${col}</th>`;
+                });
+                html += "</tr>";
+              }
+
+              // Add rows
+              response.data.forEach((student) => {
+                html += "<tr>";
+                Object.values(student).forEach((val) => {
+                  html += `<td>${val}</td>`;
+                });
+                html += "</tr>";
+              });
+
+              html += "</table>";
+
+              $("#content-container").html(html);
+            } else {
+              $("#content-container").html("<p>No students found.</p>");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("AJAX Error: " + status + " - " + error);
+            $("#content-container").html("<p>Failed to load students.</p>");
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
