@@ -34,27 +34,6 @@ if ($conn->connect_error) {
 }
 
 switch ($action) {
-    case "addStudents":
-        $name  = $_POST['name'] ?? '';
-        $class = $_POST['class'] ?? '';
-
-        if (empty($name) || empty($class)) {
-            response("error", "Missing required fields");
-        }
-
-        $stmt = $conn->prepare("INSERT INTO info (name, class) VALUES (?, ?)");
-
-        $stmt->bind_param("ss", $name, $class);
-
-        if ($stmt->execute()) {
-            response("success", "Student added successfully");
-        } else {
-            response("error", "Failed to add student: " . $stmt->error);
-        }
-        break;
-}   
-
-switch ($action) {
     case "getStudents":
         $keyword = $_POST['search'] ?? '';
         $where = "";
@@ -74,6 +53,24 @@ switch ($action) {
         }
     
         response("success", $students);
+        break;
+    case "addStudents":
+        $name  = $_POST['name'] ?? '';
+        $class = $_POST['class'] ?? '';
+
+        if (empty($name) || empty($class)) {
+            response("error", "Missing required fields");
+        }
+
+        $created_at = date("Y-m-d H:i:s");
+        $stmt = $conn->prepare("INSERT INTO info (name, class, created_at) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $name, $class, $created_at);
+
+        if ($stmt->execute()) {
+            response("success", "Student added successfully");
+        } else {
+            response("error", "Failed to add student: " . $stmt->error);
+        }
         break;
     default:
         response("error", "Unknown action: $action");

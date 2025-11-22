@@ -21,11 +21,16 @@
     />
 
     <input
-      name="addStudent"
-      id="addStudent"
+      name="studentName"
+      id="studentName"
       type="text"
-      placeholder="Add Student"
-      onchange="addStudents()"
+      placeholder="Enter Student Name"
+    />
+    <input
+      name="studentClass"
+      id="studentClass"
+      type="text"
+      placeholder="Enter Student Class"
     />
 
     <button onclick="addStudents()">Add Students</button>
@@ -39,15 +44,24 @@
 
     <script>
       function addStudents() {
-        var addstudent = $("#addStudent").val();
+        var studentName = $("#studentName").val();
+        var studentClass = $("#studentClass").val();
         $.ajax({
           url: "api/functions.php",
           type: "POST",
-          data: { action: "addStudents", addstudent: addstudent },
+          data: {
+            action: "addStudents",
+            name: studentName,
+            class: studentClass,
+          }, // API action
           dataType: "json",
           success: function (response) {
             if (response.status === "success") {
+              viewStudents();
+              $("#addStudentForm")[0].reset();
             } else {
+              console.log(response.data);
+              alert("Failed to add student.");
             }
           },
           error: function (xhr, status, error) {
