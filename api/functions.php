@@ -11,9 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 $action = $_GET['action'] ?? $_POST['action'] ?? null;
 
-$inputJSON = file_get_contents("php://input");
-$input = json_decode($inputJSON, true) ?: [];
-
 function response($status, $data = null) {
     echo json_encode([
         "status" => $status,
@@ -39,7 +36,12 @@ if ($conn->connect_error) {
 
 switch ($action) {
     case "getStudents":
-        $sql = "SELECT * FROM info";   // Adjust columns if needed
+        $keyword = $_POST['search'] ?? '';
+        $where = "";
+        if (!empty($keyword)) {
+            $where = "WHERE name LIKE '%" . $conn->real_escape_string($keyword) . "%' ";
+        }
+        $sql = "SELECT * FROM info ".$where;   // Adjust columns if needed
         $result = $conn->query($sql);
     
         if ($result->num_rows === 0) {

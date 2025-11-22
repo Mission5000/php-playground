@@ -12,7 +12,13 @@
       <h1>Dynamic Content Loader</h1>
     </header>
 
-    <input name="search" id="search" type="text" placeholder="Search..." />
+    <input
+      name="search"
+      id="search"
+      type="text"
+      placeholder="Search..."
+      onchange="viewStudents()"
+    />
     <main id="content-container"></main>
 
     <footer>
@@ -23,10 +29,11 @@
       viewStudents();
 
       function viewStudents() {
+        var search = $("#search").val();
         $.ajax({
           url: "api/functions.php", // your API file
-          type: "GET",
-          data: { action: "getStudents" }, // API action
+          type: "POST",
+          data: { action: "getStudents", search: search }, // API action
           dataType: "json",
           success: function (response) {
             if (response.status === "success") {
