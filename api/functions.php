@@ -41,7 +41,7 @@ switch ($action) {
         if (empty($name) || empty($class)) {
             response("error", "Missing required fields");
         }
-        
+
         $stmt = $conn->prepare("INSERT INTO info (name, class) VALUES (?, ?)");
 
         $stmt->bind_param("ss", $name, $class);
@@ -52,6 +52,7 @@ switch ($action) {
             response("error", "Failed to add student: " . $stmt->error);
         }
         break;
+}   
 
 switch ($action) {
     case "getStudents":
