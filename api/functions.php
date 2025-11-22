@@ -35,15 +35,16 @@ if ($conn->connect_error) {
 
 switch ($action) {
     case "addStudents":
-        $name = $_POST['name'] ?? '';
+        $name  = $_POST['name'] ?? '';
         $class = $_POST['class'] ?? '';
 
         if (empty($name) || empty($class)) {
             response("error", "Missing required fields");
         }
-
+        
         $stmt = $conn->prepare("INSERT INTO info (name, class) VALUES (?, ?)");
-        $stmt->bind_param("sis", $name, $class);
+
+        $stmt->bind_param("ss", $name, $class);
 
         if ($stmt->execute()) {
             response("success", "Student added successfully");
@@ -51,7 +52,6 @@ switch ($action) {
             response("error", "Failed to add student: " . $stmt->error);
         }
         break;
-}
 
 switch ($action) {
     case "getStudents":
