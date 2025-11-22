@@ -25,7 +25,7 @@
       id="addStudent"
       type="text"
       placeholder="Add Student"
-      onclick="location.href='addStudent.html'"
+      onchange="addStudents()"
     />
 
     <main id="content-container"></main>
@@ -34,6 +34,31 @@
       <p>&copy; 2025 My Website</p>
     </footer>
     <script src="script.js"></script>
+    <script>
+      addStudents();
+      function addStudents() {
+        var addstudent = $("#addStudent").val();
+        $.ajax({
+          url: "api/functions.php",
+          type: "POST",
+          data: { action: "addStudents", addstudent: addstudent },
+          dataType: "json",
+          success: function (response) {
+            if (response.status === "success") {
+              alert("Student added successfully!");
+              viewStudents();
+            } else {
+              alert("Failed to add student.");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("AJAX Error: " + status + " - " + error);
+            alert("An error occurred while adding the student.");
+          },
+        });
+      }
+    </script>
+
     <script>
       viewStudents();
 
