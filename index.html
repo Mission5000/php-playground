@@ -34,6 +34,7 @@
       <p>&copy; 2025 My Website</p>
     </footer>
     <script src="script.js"></script>
+
     <script>
       addStudents();
       function addStudents() {
@@ -43,18 +44,6 @@
           type: "POST",
           data: { action: "addStudents", addstudent: addstudent },
           dataType: "json",
-          success: function (response) {
-            if (response.status === "success") {
-              alert("Student added successfully!");
-              viewStudents();
-            } else {
-              alert("Failed to add student.");
-            }
-          },
-          error: function (xhr, status, error) {
-            console.error("AJAX Error: " + status + " - " + error);
-            alert("An error occurred while adding the student.");
-          },
         });
       }
     </script>
