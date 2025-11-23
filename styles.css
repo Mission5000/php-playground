@@ -8,11 +8,12 @@ header {
 }
 
 .icon-button {
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
   padding: 6px;
   font-size: 30px;
+  align-self: left;
 }
 
 .student-card {
