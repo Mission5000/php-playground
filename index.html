@@ -32,8 +32,10 @@
       type="text"
       placeholder="Enter Student Class"
     />
-
     <button onclick="addStudents()">Add Students</button>
+    <button onclick="deleteStudents()">
+      <i class="fa fa-trash-o" aria-hidden="true"></i>
+    </button>
 
     <main id="content-container"></main>
 
@@ -53,12 +55,11 @@
             action: "addStudents",
             name: studentName,
             class: studentClass,
-          }, // API action
+          },
           dataType: "json",
           success: function (response) {
             if (response.status === "success") {
               viewStudents();
-              $("#addStudentForm")[0].reset();
             } else {
               console.log(response.data);
               alert("Failed to add student.");
@@ -74,7 +75,6 @@
 
     <script>
       viewStudents();
-
       function viewStudents() {
         var search = $("#search").val();
         $.ajax({
@@ -101,6 +101,29 @@
           error: function (xhr, status, error) {
             console.error("AJAX Error: " + status + " - " + error);
             $("#content-container").html("<p>Failed to load students.</p>");
+          },
+        });
+      }
+    </script>
+    <script>
+      function deleteStudents() {
+        var studentName = $("#studentName").val();
+        $.ajax({
+          url: "api/functions.php",
+          type: "POST",
+          data: { action: "deleteStudents", name: studentName },
+          dataType: "json",
+          success: function (response) {
+            if (response.status === "success") {
+              viewStudents();
+            } else {
+              console.log(response.data);
+              alert("Failed to delete student.");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("AJAX Error: " + status + " - " + error);
+            $("#content-container").html("<p>Failed to delete student.</p>");
           },
         });
       }
