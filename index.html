@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX Content Loading Example</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
@@ -19,7 +23,6 @@
       placeholder="Search..."
       onchange="viewStudents()"
     />
-
     <input
       name="studentName"
       id="studentName"
@@ -33,9 +36,6 @@
       placeholder="Enter Student Class"
     />
     <button onclick="addStudents()">Add Students</button>
-    <button class="icon-button">
-      <i class="fa fa-trash-o" aria-hidden="true"></i>
-    </button>
 
     <main id="content-container"></main>
 
@@ -80,7 +80,7 @@
         $.ajax({
           url: "api/functions.php",
           type: "POST",
-          data: { action: "getStudents", search: search }, // API action
+          data: { action: "getStudents", search: search },
           dataType: "json",
           success: function (response) {
             if (response.status === "success") {
@@ -90,6 +90,9 @@
                 html += `<div class="student-card">
                   <div class="student-name">${student.name}</div>
                   <div class="student-class">${student.class}</div>
+                      <button class="icon-button" onclick="deleteStudents(${student.id})">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                      </button>
                 </div>`;
               });
 
@@ -104,14 +107,15 @@
           },
         });
       }
-    </script>
-    <script>
-      function deleteStudents() {
-        var studentName = $("#studentName").val();
+      function deleteStudents(id) {
+        alert("Deleting student with ID: " + id);
         $.ajax({
           url: "api/functions.php",
           type: "POST",
-          data: { action: "deleteStudents", name: studentName },
+          data: {
+            action: "deleteStudents",
+            id: id,
+          },
           dataType: "json",
           success: function (response) {
             if (response.status === "success") {

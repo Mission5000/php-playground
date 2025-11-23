@@ -72,6 +72,22 @@ switch ($action) {
             response("error", "Failed to add student: " . $stmt->error);
         }
         break;
+    case "deleteStudents":
+        $id = $_POST['id'] ?? '';
+
+        if (empty($id)) {
+            response("error", "No Such id Detected");
+        }
+
+        $stmt = $conn->prepare("DELETE FROM info WHERE id = ?");
+        $stmt->bind_param("i", $id);
+
+        if ($stmt->execute()) {
+            response("success", "Student deleted successfully");
+        } else {
+            response("error", "Failed to delete student: " . $stmt->error);
+        }
+        break;
     default:
         response("error", "Unknown action: $action");
 }

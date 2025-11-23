@@ -6,6 +6,15 @@ header {
   font-size: 24px;
   font-weight: bold;
 }
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  font-size: 30px;
+}
+
 .student-card {
   background: #ffffff;
   padding: 15px;
@@ -40,5 +49,5 @@ header {
   border: none;
   cursor: pointer;
   padding: 6px;
-  font-size: 20px;
+  font-size: 30px;
 }
