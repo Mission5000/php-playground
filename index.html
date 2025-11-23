@@ -87,12 +87,16 @@
               let html = "";
               response.data.forEach((student) => {
                 console.log(student);
-                html += `<div class="student-card">
-                  <div class="student-name">${student.name}</div>
-                  <div class="student-class">${student.class}</div>
+                html += `<div class="studentCard">
+                  <div class="studentInfo">
+                    <div class="student-name">${student.name}</div>
+                    <div class="student-class">${student.class}</div>
+                  </div>
+                  <div class="actionButtons">
                       <button class="icon-button" onclick="deleteStudents(${student.id})">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                       </button>
+                  </div>
                 </div>`;
               });
 
@@ -108,7 +112,6 @@
         });
       }
       function deleteStudents(id) {
-        alert("Deleting student with ID: " + id);
         $.ajax({
           url: "api/functions.php",
           type: "POST",
