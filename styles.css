@@ -7,15 +7,6 @@ header {
   font-weight: bold;
 }
 
-.icon-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  font-size: 30px;
-  align-self: left;
-}
-
 .studentCard {
   background: #ffffff;
   padding: 15px;
@@ -25,7 +16,7 @@ header {
 }
 
 .studentInfo {
-  text-align: right;
+  text-align: left;
   font-weight: bold;
   color: #2c3e50;
   margin-bottom: 5px;
@@ -43,10 +34,9 @@ header {
   color: #555;
 }
 
-.icon-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  font-size: 30px;
+.actionButtons {
+  margin-top: 10px;
+  text-align: right;
+  background-color: transparent;
+  font-size: 14px;
 }
