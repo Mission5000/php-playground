@@ -93,7 +93,8 @@
                     <div class="student-class">${student.class}</div>
                   </div>
                   <div class="actionButtons">
-                    <button
+                    <button>class="icon-button" onclick="editStudents(${student.id})">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
                       <button class="icon-button" onclick="deleteStudents(${student.id})">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                       </button>
@@ -112,6 +113,8 @@
           },
         });
       }
+    </script>
+    <script>
       function editStudents(id) {
         $.ajax({
           url: "api/functions.php",
@@ -132,6 +135,8 @@
           },
         });
       }
+    </script>
+    <script>
       function deleteStudents(id) {
         $.ajax({
           url: "api/functions.php",

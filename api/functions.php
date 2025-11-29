@@ -72,7 +72,7 @@ switch ($action) {
             response("error", "Failed to add student: " . $stmt->error);
         }
         break;
-    case "updateStudents":
+    case "editStudents":
         $id    = $_POST['id'] ?? '';
         $name  = $_POST['name'] ?? '';
         $class = $_POST['class'] ?? '';
