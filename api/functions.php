@@ -72,6 +72,24 @@ switch ($action) {
             response("error", "Failed to add student: " . $stmt->error);
         }
         break;
+    case "updateStudents":
+        $id    = $_POST['id'] ?? '';
+        $name  = $_POST['name'] ?? '';
+        $class = $_POST['class'] ?? '';
+
+        if (empty($id) || empty($name) || empty($class)) {
+            response("error", "Missing required fields");
+        }
+
+        $stmt = $conn->prepare("UPDATE info SET name = ?, class = ? WHERE id = ?");
+        $stmt->bind_param("ssi", $name, $class, $id);
+
+        if ($stmt->execute()) {
+            response("success", "Student updated successfully");
+        } else {
+            response("error", "Failed to update student: " . $stmt->error);
+        }
+        break;
     case "deleteStudents":
         $id = $_POST['id'] ?? '';
 
