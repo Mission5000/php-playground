@@ -8,7 +8,7 @@ header {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.search {
+#search {
   width: 250px;
   padding: 10px 15px;
   font-size: 16px;
