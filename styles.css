@@ -1,6 +1,7 @@
 header {
   background: #fa9595;
   color: #fdfdfd;
+  -webkit-text-stroke: 2px black;
   padding: 15px;
   text-align: center;
   font-size: 24px;
