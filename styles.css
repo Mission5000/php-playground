@@ -2,11 +2,20 @@ header {
   background: #fa9595;
   color: #fdfdfd;
   -webkit-text-stroke: 2px black;
-  padding: 15px;
-  text-align: center;
+  padding: 10px;
   font-size: 24px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.search {
+  width: 250px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  transition: 0.3s;
 }
 
 .studentCard {
