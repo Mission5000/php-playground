@@ -54,6 +54,22 @@ switch ($action) {
     
         response("success", $students);
         break;
+    case "getStudentsDetails":
+        $id = $_POST['id'];
+        $sql = "SELECT * FROM info WHERE id = " . intval($id);   
+        $result = $conn->query($sql);
+    
+        if ($result->num_rows === 0) {
+            response("success", []); 
+        }
+    
+        $students = [];
+        while ($row = $result->fetch_assoc()) {
+            $students[] = $row;
+        }
+    
+        response("success", $students);
+        break;
     case "addStudents":
         $name  = $_POST['name'] ?? '';
         $class = $_POST['class'] ?? '';

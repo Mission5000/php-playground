@@ -48,8 +48,20 @@
     <div id="myModal" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <p>Name</p>
-        <p>Class</p>
+        <h2>Edit Student</h2>
+        <p>Name :</p>
+        <input name="editStudentName" id="editStudentName" type="text"
+        placeholder= />
+        <p>Class :</p>
+        <input name="editStudentClass" id="editStudentClass" type="text"
+        placeholder= /> html += `
+        <div class="modalContent">
+          <div class="editInfo">
+            <div class="student-name">"Name : " + ${student.name}</div>
+            <div class="student-class">"Class : " + ${student.class}</div>
+          </div>
+        </div>
+        `;
       </div>
     </div>
 
@@ -136,27 +148,23 @@
       };
 
       function editStudents(id) {
+        console.log(id);
         var modal = document.getElementById("myModal");
         modal.style.display = "block";
 
-        // $.ajax({
-        //   url: "api/functions.php",
-        //   type: "POST",
-        //   data: { action: "editStudents", id: id },
-        //   dataType: "json",
-        //   success: function (response) {
-        //     if (response.status === "success") {
-        //       viewStudents();
-        //     } else {
-        //       console.log(response.data);
-        //       alert("Failed To Edit Student.");
-        //     }
-        //   },
-        //   error: function (xhr, status, error) {
-        //     console.error("AJAX Error: " + status + " - " + error);
-        //     $("#content-container").html("<p>Failed To Edit Student.</p>");
-        //   },
-        // });
+        $.ajax({
+          url: "api/functions.php",
+          type: "POST",
+          data: { action: "getStudentsDetails", id: id },
+          dataType: "json",
+          success: function (response) {
+            console.log(response.data);
+          },
+          error: function (xhr, status, error) {
+            console.error("AJAX Error: " + status + " - " + error);
+            $("#content-container").html("<p>Failed To Edit Student.</p>");
+          },
+        });
       }
       function deleteStudents(id) {
         $.ajax({
