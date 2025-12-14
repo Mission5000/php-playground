@@ -155,8 +155,9 @@
           data: { action: "getStudentsDetails", id: id },
           dataType: "json",
           success: function (response) {
-            $("#editStudentName").val(response.data.name);
-            $("#editStudentClass").val(response.data.class);
+            console.log(response.data);
+            $("#editStudentName").val(response.data[0].name);
+            $("#editStudentClass").val(response.data[0].class);
           },
           error: function (xhr, status, error) {
             console.error("AJAX Error: " + status + " - " + error);
@@ -164,7 +165,7 @@
           },
         });
       }
-      function updateStudents() {
+      function updateStudents(id) {
         var studentName = $("#editStudentName").val();
         var studentClass = $("#editStudentClass").val();
         $.ajax({
