@@ -155,8 +155,8 @@
           data: { action: "getStudentsDetails", id: id },
           dataType: "json",
           success: function (response) {
-            $("#editStudentName").val(response.data.studentName);
-            $("#editStudentClass").val(response.data.studentClass);
+            $("#editStudentName").val(response.data.name);
+            $("#editStudentClass").val(response.data.class);
           },
           error: function (xhr, status, error) {
             console.error("AJAX Error: " + status + " - " + error);
