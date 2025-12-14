@@ -164,6 +164,10 @@
           },
         });
       }
+      function updateStudents() {
+        $("#editStudentName").val(response.data.name);
+        $("#editStudentClass").val(response.data.class);
+      }
       function deleteStudents(id) {
         $.ajax({
           url: "api/functions.php",
