@@ -52,12 +52,7 @@
         <h2>Edit Student</h2>
 
         <p>Name :</p>
-        <input
-          name="editStudentName"
-          id="editStudentName"
-          type="text"
-          value=""
-        />
+        <input name="editStudentName" id="editStudentName" type="text" />
 
         <p>Class :</p>
         <input name="editStudentClass" id="editStudentClass" type="text" />
@@ -160,8 +155,8 @@
           data: { action: "getStudentsDetails", id: id },
           dataType: "json",
           success: function (response) {
-            $("#editStudentName").val(response.data.name);
-            $("#editStudentClass").val(response.data.class);
+            $("#editStudentName").val(response.data.studentName);
+            $("#editStudentClass").val(response.data.studentClass);
           },
           error: function (xhr, status, error) {
             console.error("AJAX Error: " + status + " - " + error);
