@@ -52,7 +52,12 @@
         <h2>Edit Student</h2>
 
         <p>Name :</p>
-        <input name="editStudentName" id="editStudentName" type="text" />
+        <input
+          name="editStudentName"
+          id="editStudentName"
+          type="text"
+          value=""
+        />
 
         <p>Class :</p>
         <input name="editStudentClass" id="editStudentClass" type="text" />
@@ -110,6 +115,7 @@
                   <div class="actionButtons">
                     <button><class="icon-button , myBtn" onclick="editStudents(${student.id})">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </button>
                       <button class="icon-button" onclick="deleteStudents(${student.id})">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                       </button>
@@ -154,7 +160,8 @@
           data: { action: "getStudentsDetails", id: id },
           dataType: "json",
           success: function (response) {
-            console.log(response.data);
+            $("#editStudentName").val(response.data.name);
+            $("#editStudentClass").val(response.data.class);
           },
           error: function (xhr, status, error) {
             console.error("AJAX Error: " + status + " - " + error);
