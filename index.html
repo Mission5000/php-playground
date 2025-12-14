@@ -165,8 +165,31 @@
         });
       }
       function updateStudents() {
-        $("#editStudentName").val(response.data.name);
-        $("#editStudentClass").val(response.data.class);
+        var studentName = $("#editStudentName").val();
+        var studentClass = $("#editStudentClass").val();
+        $.ajax({
+          url: "api/functions.php",
+          type: "POST",
+          data: {
+            action: "updateStudents",
+            name: studentName,
+            class: studentClass,
+          },
+          dataType: "json",
+          success: function (response) {
+            if (response.status === "success") {
+              viewStudents();
+              closeModal();
+            } else {
+              console.log(response.data);
+              alert("Failed to update student.");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("AJAX Error: " + status + " - " + error);
+            $("#content-container").html("<p>Failed to update student.</p>");
+          },
+        });
       }
       function deleteStudents(id) {
         $.ajax({
