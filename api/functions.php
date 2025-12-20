@@ -107,6 +107,19 @@ switch ($action) {
         }
         break;
     case "updateStudents":
+        $id     = $_POST['id'] ?? '';
+        $status = $_POST['status'] ?? '';
+        if (empty($id) || empty($status)) {
+            response("error", "Missing required fields");
+        }
+        $stmt = $conn->prepare("UPDATE info SET status = ? WHERE id = ?");
+        $stmt->bind_param("si", $status, $id);
+        if ($stmt->execute()) {
+            response("success", "Student status updated successfully");
+        } else {
+            response("error", "Failed to update student status: " . $stmt->error);
+        }
+        
         break;
     case "deleteStudents":
         $id = $_POST['id'] ?? '';
