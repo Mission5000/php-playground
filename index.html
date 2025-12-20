@@ -62,6 +62,7 @@
     </div>
 
     <script>
+      var selectedId = 0;
       function addStudents() {
         var studentName = $("#studentName").val();
         var studentClass = $("#studentClass").val();
@@ -145,7 +146,7 @@
       };
 
       function editStudents(id) {
-        console.log(id);
+        selectedId = id;
         var modal = document.getElementById("myModal");
         modal.style.display = "block";
 
@@ -166,21 +167,22 @@
         });
       }
 
-      function updateStudents(id) {
+      function updateStudents() {
         var studentName = $("#editStudentName").val();
         var studentClass = $("#editStudentClass").val();
         $.ajax({
           url: "api/functions.php",
           type: "POST",
           data: {
-            action: "updateStudents",
+            action: "editStudents",
             name: studentName,
             class: studentClass,
-            id: id,
+            id: selectedId,
           },
           dataType: "json",
           success: function (response) {
             if (response.status === "success") {
+              alert("Student Updated Successfully.");
               viewStudents();
               closeModal();
             } else {
