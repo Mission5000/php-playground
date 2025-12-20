@@ -29,12 +29,16 @@
       type="text"
       placeholder="Enter Student Name"
     />
-    <input
-      name="studentClass"
-      id="studentClass"
-      type="text"
-      placeholder="Enter Student Class"
-    />
+
+    <select name="studentClass" id="studentClass">
+      <option value="">Select Class</option>
+      <option value="Class 1">Class 1</option>
+      <option value="Class 2">Class 2</option>
+      <option value="Class 3">Class 3</option>
+      <option value="Class 4">Class 4</option>
+      <option value="Class 5">Class 5</option>
+    </select>
+
     <button onclick="addStudents()">Add Students</button>
 
     <main id="content-container"></main>
@@ -55,7 +59,14 @@
         <input name="editStudentName" id="editStudentName" type="text" />
 
         <p>Class :</p>
-        <input name="editStudentClass" id="editStudentClass" type="text" />
+        <select name="editStudentClass" id="editStudentClass">
+          <option value="">Select Class</option>
+          <option value="Class 1">Class 1</option>
+          <option value="Class 2">Class 2</option>
+          <option value="Class 3">Class 3</option>
+          <option value="Class 4">Class 4</option>
+          <option value="Class 5">Class 5</option>
+        </select>
 
         <button onclick="updateStudents()">Update Student</button>
       </div>
@@ -182,9 +193,9 @@
           dataType: "json",
           success: function (response) {
             if (response.status === "success") {
-              alert("Student Updated Successfully.");
               viewStudents();
               closeModal();
+              alert("Student Updated Successfully.");
             } else {
               console.log(response.data);
               alert("Failed to update student.");
