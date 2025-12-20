@@ -107,20 +107,20 @@ switch ($action) {
         }
         break;
     case "updateStudents":
-        $id     = $_POST['id'] ?? '';
+        $id = $_POST['id'] ?? '';
 
         if (empty($id)) {
             response("error", "No Such id Detected");
         }
 
-        $stmt = $conn->prepare("UPDATE info SET status = 'active' WHERE id = ?");
+        $stmt = $conn->prepare("UPDATE info WHERE id = ?");
         $stmt->bind_param("i", $id);
-        if ($stmt->execute()) {
-            response("success", "Student status updated successfully");
-        } else {
-            response("error", "Failed to update student status: " . $stmt->error);
-        }
         
+        if ($stmt->execute()) {
+            response("success", "Student updated successfully");
+        } else {
+            response("error", "Failed to update student: " . $stmt->error);
+        }
         break;
     case "deleteStudents":
         $id = $_POST['id'] ?? '';
